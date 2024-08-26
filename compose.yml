@@ -8,3 +8,10 @@ services:
     command: yarn dev
     ports:
       - 3000:3000
+
+  cypress:
+    image: cypress/included:13.10.0
+    volumes:
+      - ./global-countries/:/app
+    working_dir: /app
+    entrypoint: cypress
