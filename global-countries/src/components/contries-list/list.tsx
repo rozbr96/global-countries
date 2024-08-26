@@ -1,8 +1,12 @@
 
 import React from 'react'
-import { Country } from '@/__generated__/graphql'
+import { CountryCoreFieldsFragment } from '@/__generated__/graphql'
 
-export default function CountriesList({ countries }: { countries: Country[] }) {
+export default function CountriesList({
+  countries
+}: {
+  countries: CountryCoreFieldsFragment[]
+}) {
   return (
     countries.map((country) => {
       return (

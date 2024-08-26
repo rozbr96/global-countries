@@ -1,11 +1,15 @@
 
 import React from 'react'
-import { CountriesQuery } from '@/__generated__/graphql'
+import { CountryCoreFieldsFragment } from '@/__generated__/graphql'
 
 import EmptyList from './empty'
 import List from './list'
 
-export default function CountriesList({ queryResult }: { queryResult?: CountriesQuery }) {
+export default function CountriesList({
+  countries
+}: {
+  countries?: CountryCoreFieldsFragment[]
+}) {
   return (
     <table>
       <thead>
@@ -23,9 +27,9 @@ export default function CountriesList({ queryResult }: { queryResult?: Countries
 
       <tbody>
         {
-          queryResult && queryResult.countries.length > 0
-            ? <List countries={queryResult.countries}/>
-            : <EmptyList/>
+          countries && countries.length > 0
+            ? <List countries={countries} />
+            : <EmptyList />
         }
       </tbody>
     </table>

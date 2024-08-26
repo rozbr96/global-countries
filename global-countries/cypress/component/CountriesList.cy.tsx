@@ -3,7 +3,7 @@ import React from 'react'
 
 import { CountriesList } from '@/components'
 
-import { queryResult } from './countries'
+import COUNTRIES from './countries'
 
 describe('CountriesList.cy.tsx', () => {
   it('renders the countries table list', () => {
@@ -21,7 +21,7 @@ describe('CountriesList.cy.tsx', () => {
   })
 
   it('renders the countries table list with some countries in it', () => {
-    cy.mount(<CountriesList queryResult={queryResult} />)
+    cy.mount(<CountriesList countries={COUNTRIES} />)
     cy.get('tbody').contains('Brazil')
     cy.get('tbody').contains('Portuguese')
     cy.get('tbody').contains('Brasília')
