@@ -13,7 +13,8 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
-    "\n  query Countries {\n    countries {\n      emoji\n      name\n      capital\n      languages {\n        name\n      }\n    }\n  }\n": types.CountriesDocument,
+    "\n  fragment CountryCoreFields on Country {\n    emoji\n    name\n    capital\n    languages {\n      name\n    }\n  }\n": types.CountryCoreFieldsFragmentDoc,
+    "\n  query Countries {\n    countries {\n      ...CountryCoreFields\n    }\n  }\n": types.CountriesDocument,
 };
 
 /**
@@ -33,7 +34,11 @@ export function gql(source: string): unknown;
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n  query Countries {\n    countries {\n      emoji\n      name\n      capital\n      languages {\n        name\n      }\n    }\n  }\n"): (typeof documents)["\n  query Countries {\n    countries {\n      emoji\n      name\n      capital\n      languages {\n        name\n      }\n    }\n  }\n"];
+export function gql(source: "\n  fragment CountryCoreFields on Country {\n    emoji\n    name\n    capital\n    languages {\n      name\n    }\n  }\n"): (typeof documents)["\n  fragment CountryCoreFields on Country {\n    emoji\n    name\n    capital\n    languages {\n      name\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  query Countries {\n    countries {\n      ...CountryCoreFields\n    }\n  }\n"): (typeof documents)["\n  query Countries {\n    countries {\n      ...CountryCoreFields\n    }\n  }\n"];
 
 export function gql(source: string) {
   return (documents as any)[source] ?? {};
