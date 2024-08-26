@@ -1,7 +1,11 @@
 
 import React from 'react'
+import { CountriesQuery } from '@/__generated__/graphql'
 
-export default function CountriesList() {
+import EmptyList from './empty'
+import List from './list'
+
+export default function CountriesList({ queryResult }: { queryResult?: CountriesQuery }) {
   return (
     <table>
       <thead>
@@ -18,11 +22,11 @@ export default function CountriesList() {
       </thead>
 
       <tbody>
-        <tr>
-          <td colSpan={4}>
-            No countries could be found!
-          </td>
-        </tr>
+        {
+          queryResult && queryResult.countries.length > 0
+            ? <List countries={queryResult.countries}/>
+            : <EmptyList/>
+        }
       </tbody>
     </table>
   )
