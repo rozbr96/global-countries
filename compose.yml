@@ -1,0 +1,10 @@
+
+services:
+  app:
+    image: node:20.10.0
+    volumes:
+      - ./global-countries/:/app
+    working_dir: /app
+    entrypoint: yarn dev
+    ports:
+      - 3000:3000
