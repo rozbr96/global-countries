@@ -29,4 +29,25 @@ describe('CountriesList.cy.tsx', () => {
     cy.get('tbody').contains('Japanese')
     cy.get('tbody').contains('Tokyo')
   })
+
+  it('filters the listing, finding results', () => {
+    cy.mount(<CountriesList countries={COUNTRIES}/>)
+
+    cy.get('#filter').type('bra')
+    cy.get('tbody').contains('Brazil')
+    cy.get('td').each((td) => {
+      cy.wrap(td).should('not.have.text', 'Japan')
+    })
+  })
+
+  it('filters the listing, not finding results', () => {
+    cy.mount(<CountriesList countries={COUNTRIES}/>)
+
+    cy.get('#filter').type('united states')
+    cy.get('tbody').contains('No countries could be found!')
+    cy.get('td').each((td) => {
+      cy.wrap(td).should('not.have.text', 'Japan')
+      cy.wrap(td).should('not.have.text', 'Brazil')
+    })
+  })
 })
